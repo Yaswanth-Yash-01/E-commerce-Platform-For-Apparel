@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="newmain.css">
+</head>
+<body>
+    
+<ul>
+  <li><a href="#" id="home">Home</a></li>
+  <li><a href="#" id="news">News</a></li>
+  <li><a href="#" id="contact">Contact</a></li>
+  <li><a href="#" id="about">About</a></li>
+</ul>
+
+
+<div id="content-area"></div> 
+
+<script>
+   
+    function loadContent(page) {
+        
+        fetch(page)
+            .then(response => response.text())
+            .then(data => {
+              
+                document.getElementById('content-area').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+
+    var homeLink = document.getElementById('home');
+    var newsLink = document.getElementById('news');
+    var contactLink = document.getElementById('contact');
+    var aboutLink = document.getElementById('about');
+
+
+    homeLink.addEventListener('click', function(event) {
+        event.preventDefault(); 
+
+        loadContent('fetchproducts.php');
+    });
+
+    newsLink.addEventListener('click', function(event) {
+        event.preventDefault(); 
+      
+        loadContent('menshirts.html');
+    });
+
+    contactLink.addEventListener('click', function(event) {
+        event.preventDefault(); 
+      
+        loadContent('contact.php');
+    });
+
+    aboutLink.addEventListener('click', function(event) {
+        event.preventDefault(); 
+
+        loadContent('about.php');
+    });
+</script>
+
+</body>
+</html>

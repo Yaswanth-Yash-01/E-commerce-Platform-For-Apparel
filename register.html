@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Trends</title>
+    <link rel="stylesheet" href="faculty.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+    </header>
+    <div class="container">
+        <main>
+            <img class ="logo" src="Images/Logo.png">
+            <h2>Sign up here</h2>
+            <form id="registerForm" action="register.php" method="post"> 
+                
+                <label for="email">Email Address:</label>
+                <input type="text" id="email" name="email" required>
+                <br><br>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <br><br>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                
+                <br><br>
+                <p id="passwordError" class="error-message" style="display: none;"></p>
+                <p id="errorMessageUser" class="error-message" style="display: none;"></p>
+                <br><br>
+                
+                <button type="button" onclick="validatePassword()">Sign Up</button> 
+            </form>
+        </main>
+    </div>
+    <script>
+        function validatePassword() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var passwordError = document.getElementById("passwordError");
+            var errorMessageUser = document.getElementById("errorMessageUser");
+
+          
+            var passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+
+
+            if (password.length < 8 || !passwordPattern.test(password)) {
+
+                passwordError.textContent = "Password must be at least 8 characters long and contain at least one letter, one number, and one special character.";
+                passwordError.style.display = "block";
+                return; 
+            }
+
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "register.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = xhr.responseText;
+                    if (response === "Username already exists") {
+                        
+                        errorMessageUser.textContent = response;
+                        errorMessageUser.style.display = "block";
+                    } else {
+
+                        errorMessageUser.style.display = "none";
+                        document.getElementById("registerForm").submit();
+                    }
+                }
+            };
+            xhr.send("username=" + username);
+        }
+    </script>
+    <script>
+        var backgrounds = [
+            "url('https://www.rareism.com/cdn/shop/files/rareism-01.jpg?v=1709275853')",
+            "url('https://dtbtob4osa700.cloudfront.net/BrandsImages/19092022163702628_brbann.jpg')",
+            "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdQ9FcnW7KUMulpEGXWQfP1GSBv4jlKYgI_3m22mQKSA&s')",
+        ];
+
+        
+        function changeBackground() {
+            var index = Math.floor(Math.random() * backgrounds.length);
+            document.body.style.backgroundImage = backgrounds[index];
+        }
+
+     
+        setInterval(changeBackground, 2000);
+
+       
+        changeBackground();
+    </script>
+</body>
+</html>

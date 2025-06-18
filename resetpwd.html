@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trends Login</title>
+    <link rel="stylesheet" href="faculty.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <img class="logo" src="Images/Logo.png">
+            <h1>Reset Your Password</h1>
+            <form id="resetPasswordForm" action="resetpwd.php" method="post"> 
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <br><br>
+
+                <label for="password">New Password:</label>
+                <input type="password" id="password" name="password" required>
+     
+                <br><br>
+                <label for="password">Confirm Your New Password:</label>
+                <input type="password" id="finalpassword" name="finalpassword" required>
+                <br>
+                <p id="passwordError" class="error-message" style="display: none;">Passwords do not match!</p>
+                <p id="passwordCriteriaError" class="error-message" style="display: none;">Password must be at least 8 characters long and contain at least one letter, one number, and one special character.</p>
+                
+                <br>
+                <button type="button" onclick="validatePassword()">Reset</button>    
+            </form>
+        </main>
+    </div>
+
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var finalPassword = document.getElementById("finalpassword").value;
+            var passwordError = document.getElementById("passwordError");
+            var passwordCriteriaError = document.getElementById("passwordCriteriaError");
+
+           
+            var passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+
+            if (password !== finalPassword) {
+                passwordError.style.display = "block";
+                passwordCriteriaError.style.display = "none"; 
+            } else if (!passwordPattern.test(password)) {
+                passwordCriteriaError.style.display = "block";
+                passwordError.style.display = "none"; 
+            } else {
+
+                document.getElementById("resetPasswordForm").submit();
+            }
+        }
+    </script>
+
+    <script>
+        var backgrounds = [
+            "url('https://www.nylon.com.sg/wp-content/uploads/2022/03/H-M-Liunic-NYLON-Banner.jpg')",
+            "url('https://thehouseofrare.com/cdn/shop/files/Specially_Made_Banner_-_Slider_1000x.jpg?v=1712318727')",
+        ];
+
+        function changeBackground() {
+            var index = Math.floor(Math.random() * backgrounds.length);
+            document.body.style.backgroundImage = backgrounds[index];
+        }
+
+        setInterval(changeBackground, 2000);
+        changeBackground();
+    </script>
+</body>
+<script>
+    sessionStorage.setItem('redirectUrl', window.location.href);
+</script>
+</html>

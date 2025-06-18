@@ -1,0 +1,34 @@
+#productForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+#status {
+    grid-column: 2;
+    justify-self: start;
+}
+
+#category, #description, #title, #tag {
+    grid-column: span 2;
+}
+
+#imagePreview {
+    grid-column: span 2;
+}
+
+#submitBtn {
+    grid-column: span 2;
+    justify-self: start;
+}
+
+.image-preview img {
+    max-width: 50px; 
+    max-height: 50px; 
+    display: none;
+    margin-top: 10px;
+}

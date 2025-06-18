@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trends Login</title>
+    <link rel="stylesheet" href="faculty.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+       
+    </header>
+    <div class="container">
+        <main>
+            <img class="logo" src="Images/Logo.png">
+            <h1>Login into your account</h1>
+            <form action="login.php" method="post" id="loginForm"> 
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <br><br>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <br><br>
+                <p id="passwordError" class="error-message" style="display: none;"></p>
+                <br><br>
+                <button type="button" onclick="validateCredentials()">Login</button>
+                <br><br>     
+            </form>        
+            <form action="resetpwd.html">
+                <button type="submit">Forgot Password</button>
+            </form>
+        </main>
+    </div>
+</body>
+<script>
+    function validateCredentials() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var passwordError = document.getElementById("passwordError");
+
+
+        var isValid = username.trim() !== "" && password.trim() !== "";
+
+        if (!isValid) {
+
+            passwordError.textContent = "Wrong Credentials";
+            passwordError.style.display = "block";
+        } else {
+          
+            document.getElementById("loginForm").submit();
+        }
+    }
+</script>
+
+<script>
+       
+    var backgrounds = [
+        "url('https://thehouseofrare.com/cdn/shop/files/awaken-_desktop_1900x.jpg?v=1710846274')",
+        "url('https://thehouseofrare.com/cdn/shop/files/shirts_9e6ed4e8-b38a-4e32-90e4-55aacf3ecb5f.jpg?v=1706105607')",
+        "url('https://thehouseofrare.com/cdn/shop/files/static_banner_landing_page_5caaaec4-4543-46d1-a553-c276c290fb5d.jpg?v=1712062529')",
+        "url('https://thehouseofrare.com/cdn/shop/articles/Banner_Blog_-_4_664e07c5-4211-4263-9bec-1d7c434759e3.jpg?v=1656074011')",
+        "url('https://ubcitybangalore.in/wp-content/uploads/2021/12/thumbnail-13.jpg')"
+        
+    ];
+
+    function changeBackground() {
+        var index = Math.floor(Math.random() * backgrounds.length);
+        document.body.style.backgroundImage = backgrounds[index];
+    }
+    setInterval(changeBackground, 2000);
+
+
+    changeBackground();
+</script>
+<script>
+    sessionStorage.setItem('redirectUrl', window.location.href);
+</script>
+</html>
